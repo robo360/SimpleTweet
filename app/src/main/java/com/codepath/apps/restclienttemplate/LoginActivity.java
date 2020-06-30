@@ -11,6 +11,8 @@ import com.codepath.apps.restclienttemplate.models.SampleModel;
 import com.codepath.apps.restclienttemplate.models.SampleModelDao;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
+import java.sql.Time;
+
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 
 	SampleModelDao sampleModelDao;
@@ -45,8 +47,9 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		Log.i("rkprkp", "login Success!");
-		Intent i = new Intent(this, TimeLineActivity.class);
+		//Intent i = new Intent(this, TimelineActivity.class);
+		//startActivity(i);
+		Intent i = new Intent(this, TimelineActivity.class);
 		startActivity(i);
 	}
 
