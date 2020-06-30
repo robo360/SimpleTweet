@@ -4,13 +4,9 @@ import android.content.Context;
 
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.codepath.oauth.BuildConfig;
 import com.codepath.oauth.OAuthBaseClient;
-import com.github.scribejava.apis.FlickrApi;
 import com.github.scribejava.apis.TwitterApi;
 import com.github.scribejava.core.builder.api.BaseApi;
-
-import static com.codepath.oauth.BuildConfig.*;
 
 /*
  * 
@@ -50,7 +46,6 @@ public class TwitterClient extends OAuthBaseClient {
 	public void getHomeTimeline(JsonHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("statuses/home_timeline.json");
 		RequestParams params = new RequestParams();
-		params.put("count", 5);
 		client.get(apiUrl, params, handler);
 	}
 
