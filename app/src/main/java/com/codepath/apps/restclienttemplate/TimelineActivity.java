@@ -26,7 +26,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements ComposeFragment.OnFinishListener {
     TwitterClient client;
     ActivityTimelineBinding binder;
     RecyclerView rvTweets;
@@ -108,7 +108,7 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "On Failure. Message: Did not log more data ");
 
             }
-        }, tweets.get(tweets.size()-1).id);
+        }, tweets.get(tweets.size() - 1).id);
 
     }
 
@@ -118,12 +118,22 @@ public class TimelineActivity extends AppCompatActivity {
         return true;
     }
 
+    public void showComposeFragment(){
+        Log.i(TAG, "OptionsItemSelected");
+        ComposeFragment composeFragment = new ComposeFragment();
+        composeFragment.show(getSupportFragmentManager(), "datePicker");
+        Log.i(TAG, "OptionsItemSelected");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if( item.getItemId() == R.id.compose){
+        if (item.getItemId() == R.id.compose) {
             //move to a composing layer
-            Intent intent = new Intent(this, ComposeActivity.class);
-            startActivityForResult(intent, REQUEST_CODE);
+//            Intent intent = new Intent(this, ComposeActivity.class);
+//            startActivityForResult(intent, REQUEST_CODE);
+            //Compose layer
+            showComposeFragment();
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,12 +142,12 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.i(TAG, "On success: "  + json.toString());
+                Log.i(TAG, "On success: " + json.toString());
                 JSONArray jsonArray = json.jsonArray;
                 adapter.clear();
                 try {
                     adapter.addAll(Tweet.fromJson(jsonArray));
-                    Log.i(TAG, "Yes ......."+tweets.get(0).mediaUrl);
+                    Log.i(TAG, "Yes ......." + tweets.get(0).mediaUrl);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -145,19 +155,26 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.i(TAG, "On Failure. Message: "+ response);
+                Log.i(TAG, "On Failure. Message: " + response);
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             //Get the data from the intent
             Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
             //Update the RV with the tweet
             tweets.add(0, tweet);
             adapter.notifyDataSetChanged();
         }
-            super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onFinished(Tweet tweet) {
+        tweets.add(0, tweet);
+        adapter.notifyDataSetChanged();
     }
 }
