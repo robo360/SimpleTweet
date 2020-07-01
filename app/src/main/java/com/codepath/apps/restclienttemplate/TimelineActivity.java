@@ -18,6 +18,7 @@ import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
@@ -91,7 +92,12 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "On success: Log more data ");
                 //  --> Deserialize and construct new model objects from the API response
                 JSONArray jsonArray = json.jsonArray;
-                List<Tweet> tweets = Tweet.fromJson(jsonArray);
+                List<Tweet> tweets = null;
+                try {
+                    tweets = Tweet.fromJson(jsonArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 //  --> Append the new data objects to the existing set of items inside the array of items
                 //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()
                 adapter.addAll(tweets);
@@ -129,7 +135,12 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "On success: "  + json.toString());
                 JSONArray jsonArray = json.jsonArray;
                 adapter.clear();
-                adapter.addAll(Tweet.fromJson(jsonArray));
+                try {
+                    adapter.addAll(Tweet.fromJson(jsonArray));
+                    Log.i(TAG, "Yes ......."+tweets.get(0).mediaUrl);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

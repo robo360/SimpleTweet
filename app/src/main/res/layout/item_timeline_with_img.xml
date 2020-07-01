@@ -34,13 +34,13 @@
         android:layout_height="21dp"
         android:layout_below="@+id/tvTimeAgo"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="4dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvScreenName"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="This is my tweet" />
+        app:layout_constraintStart_toStartOf="@+id/ivMedia"
+        app:layout_constraintTop_toBottomOf="@+id/ivMedia"
+        app:layout_constraintVertical_bias="0.476"
+        tools:text="This is my tweet"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvTimeAgo"
@@ -53,5 +53,16 @@
         app:layout_constraintStart_toEndOf="@+id/tvScreenName"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="8 min. ago" />
+
+    <ImageView
+        android:id="@+id/ivMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvScreenName"
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@tools:sample/avatars"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

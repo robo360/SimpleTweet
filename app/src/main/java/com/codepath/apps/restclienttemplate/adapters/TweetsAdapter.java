@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate.adapters;
 
 import android.content.Context;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,16 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
-public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
+public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
     List<Tweet> tweets;
+    View view;
 
     public TweetsAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
@@ -28,16 +34,41 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_timeline, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+        switch (viewType) {
+            case 1:
+                view = LayoutInflater.from(context).inflate(R.layout.item_timeline_with_img, parent, false);
+                return new ViewHolderWithImage(view);
+            default:
+                view = LayoutInflater.from(context).inflate(R.layout.item_timeline, parent, false);
+                return new ViewHolderWithoutImage(view);
+        }
+    }
+    @Override
+    public int getItemViewType(int position) {
+        // Just as an example, return 0 or 2 depending on position
+        // Note that unlike in ListView adapters, types don't have to be contiguous
+        Tweet tweet = tweets.get(position);
+        if(tweet.mediaUrl.isEmpty()){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Tweet tweet = tweets.get(position);
-        holder.bind(tweet);
-
+        switch (holder.getItemViewType()){
+            case 1:
+                ViewHolderWithImage holderWithImage = (ViewHolderWithImage) holder;
+                holderWithImage.bindWithImage(tweet);
+                break;
+            default:
+                ViewHolderWithoutImage holderWithoutImage = (ViewHolderWithoutImage) holder;
+                holderWithoutImage.bindWithoutImage(tweet);
+        }
     }
 
     /* Within the RecyclerView.Adapter class */
@@ -58,24 +89,72 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         return tweets.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolderWithoutImage extends RecyclerView.ViewHolder {
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
+        TextView tvTimeAgo;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolderWithoutImage(@NonNull View itemView) {
             super(itemView);
 
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
 
         }
 
-        public void bind(Tweet tweet) {
+        public void bindWithoutImage(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
+            Log.i("TweetsAdapter", tweet.mediaUrl);
+            tvTimeAgo.setText(getRelativeTimeAgo(tweet.timestamp));
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
         }
+    }
+
+    public class ViewHolderWithImage extends RecyclerView.ViewHolder {
+        ImageView ivProfileImage;
+        ImageView ivMedia;
+        TextView tvBody;
+        TextView tvScreenName;
+        TextView tvTimeAgo;
+
+        public ViewHolderWithImage(@NonNull View itemView) {
+            super(itemView);
+
+            ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
+            tvBody = itemView.findViewById(R.id.tvBody);
+            tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
+            ivMedia = itemView.findViewById(R.id.ivMedia);
+
+        }
+
+        public void bindWithImage(Tweet tweet) {
+            tvBody.setText(tweet.body);
+            tvScreenName.setText(tweet.user.screenName);
+            tvTimeAgo.setText(getRelativeTimeAgo(tweet.timestamp));
+            Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+            Log.i("TweetsAdapter", tweet.mediaUrl);
+            Glide.with(context).load(tweet.mediaUrl).into(ivMedia);
+        }
+    }
+    public String getRelativeTimeAgo(String rawJsonDate) {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(rawJsonDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return relativeDate;
     }
 }

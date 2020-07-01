@@ -41,7 +41,7 @@ public class ComposeActivity extends AppCompatActivity {
         setContentView(binder.getRoot());
         etCompose = binder.etCompose;
         btnTweet = binder.btnTweet;
-        // for the counter on the composer TextLayoutFilter set the max of tweet legnth.
+        // for the counter on the composer TextLayoutFilter set the max of tweet length.
         binder.etComposeHolder.setCounterMaxLength(MAX_TWEET_LENGTH);
 
         //set a click listener and make an api call to publish tweet
@@ -60,7 +60,8 @@ public class ComposeActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Headers headers, JSON json) {
                             Snackbar.make(btnTweet, "Tweet Posted!", Snackbar.LENGTH_LONG).show();
-                            Tweet tweet = new Tweet(json.jsonObject);
+                            Tweet tweet = null;
+                            tweet = new Tweet(json.jsonObject);
                             Log.i(TAG, "Published Tweet says"+tweet);
                             etCompose.setText("");
                             Snackbar.make(btnTweet, "Tweet Published", Snackbar.LENGTH_LONG).show();
@@ -69,7 +70,6 @@ public class ComposeActivity extends AppCompatActivity {
                             intent.putExtra("tweet", Parcels.wrap(tweet));
                             setResult(RESULT_OK, intent);
                             finish();
-
                         }
 
                         @Override

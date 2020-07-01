@@ -1,5 +1,7 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.util.Log;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
@@ -21,16 +23,23 @@ public class Tweet {
     public
     long id;
     @ColumnInfo
+    public
     String timestamp;
     @ColumnInfo
     public
     String body;
+
+    @ColumnInfo
+    public
+    String mediaUrl;
+
 
     // Use @Embedded to keep the column entries as part of the same table while still
     // keeping the logical separation between the two objects.
     @Embedded
     public
     User user;
+
 
     //empty constructor needed by the Parceler library
     public Tweet(){
@@ -46,9 +55,19 @@ public class Tweet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        try {
+            JSONObject media = object.getJSONObject("entities").getJSONArray("media").getJSONObject(0);
+            this.mediaUrl = media.getString("media_url_https");
+            Log.i("TweetsAdapter", mediaUrl);
+        } catch (JSONException e) {
+            this.mediaUrl = "";
+            Log.i("TweetsAdapter", mediaUrl);
+        }
+
     }
 
-    public static ArrayList<Tweet> fromJson(JSONArray jsonArray) {
+    public static ArrayList<Tweet> fromJson(JSONArray jsonArray) throws JSONException {
         ArrayList<Tweet> tweets = new ArrayList<Tweet>(jsonArray.length());
 
         for (int i=0; i < jsonArray.length(); i++) {
