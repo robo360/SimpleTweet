@@ -4,7 +4,9 @@ import androidx.room.ColumnInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class User {
 
     @ColumnInfo
@@ -17,6 +19,10 @@ public class User {
     @ColumnInfo
     public
     String profileImageUrl;
+    //used by the parcel library
+    public User(){
+
+    }
 
     // Parse model from JSON
     public static User parseJSON(JSONObject tweetJson) throws JSONException {

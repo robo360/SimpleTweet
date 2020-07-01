@@ -2,22 +2,24 @@ package com.codepath.apps.restclienttemplate.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 
+@Parcel
 @Entity
 public class Tweet {
     // Define database columns and associated fields
     @PrimaryKey
     @ColumnInfo
-    Long id;
+    public
+    long id;
     @ColumnInfo
     String timestamp;
     @ColumnInfo
@@ -30,11 +32,17 @@ public class Tweet {
     public
     User user;
 
+    //empty constructor needed by the Parceler library
+    public Tweet(){
+
+    }
+
     public Tweet(JSONObject object){
         try {
             this.user = User.parseJSON(object.getJSONObject("user"));
             this.timestamp = object.getString("created_at");
             this.body = object.getString("text");
+            this.id = object.getLong("id");
         } catch (JSONException e) {
             e.printStackTrace();
         }

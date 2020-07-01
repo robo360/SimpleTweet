@@ -11,8 +11,6 @@ import com.codepath.apps.restclienttemplate.models.SampleModel;
 import com.codepath.apps.restclienttemplate.models.SampleModelDao;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
-import java.sql.Time;
-
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 
 	SampleModelDao sampleModelDao;
@@ -35,6 +33,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 		});
 	}
 
+	//Todo: use actual toolbar features avoid these ones
 
 	// Inflate the menu; this adds items to the action bar if it is present.
 	@Override
