@@ -176,48 +176,45 @@
         android:id="@+id/btnTweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCompose"
+        android:layout_below="@+id/etComposeHolder"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="9dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#1DA1F2"
         android:text="Reply"
         android:textColor="#FBF6F6"
         app:cornerRadius="20dp" />
 
-    <EditText
-        android:id="@+id/etCompose"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etComposeHolder"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/card"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="4dp"
-        android:background="#DDD9D9"
-        android:backgroundTint="#EBDDDDDD"
-        android:elevation="3dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Reply"
-        android:inputType="textMultiLine"
-        android:minLines="5"
-        android:textColorLink="#1DA1F2"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="79dp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etComposeHolder"
-        android:layout_width="396dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etCompose"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="-6dp"
         app:counterEnabled="true"
         app:counterMaxLength="10">
+
+        <EditText
+            android:id="@+id/etCompose"
+            android:layout_width="399dp"
+            android:layout_height="135dp"
+            android:layout_below="@+id/card"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="-3dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="79dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
