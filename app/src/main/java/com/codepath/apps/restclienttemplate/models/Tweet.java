@@ -33,6 +33,14 @@ public class Tweet {
     public
     String mediaUrl;
 
+    @ColumnInfo
+    public
+    int favoriteCount;
+
+    @ColumnInfo
+    public
+    int retweetCount;
+
 
     // Use @Embedded to keep the column entries as part of the same table while still
     // keeping the logical separation between the two objects.
@@ -52,6 +60,9 @@ public class Tweet {
             this.timestamp = object.getString("created_at");
             this.body = object.getString("text");
             this.id = object.getLong("id");
+            this.retweetCount = object.getInt("retweet_count");
+            this.favoriteCount = object.getInt("favorite_count");
+            Log.i("FUCK YOU", "Messsage");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +37,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
     EndlessRecyclerViewScrollListener scrollListener;
+    ImageButton ibCompose;
+    ImageButton ibReflesh;
 
     public static final String TAG = "TimelineActivity";
     private final int REQUEST_CODE = 20;
@@ -43,7 +48,25 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
         super.onCreate(savedInstanceState);
         binder = ActivityTimelineBinding.inflate(getLayoutInflater());
         setContentView(binder.getRoot());
+        //set onclick listeners to toolbar ImageButtons
+        ibCompose = binder.ibCompose;
+        ibCompose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showComposeFragment();
+            }
+        });
+        ibReflesh = binder.ibReflesh;
+        ibReflesh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                populateHomeTimeline();
+                Toast.makeText(TimelineActivity.this, "New feed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+
+        //set listener for swipe action
         swipeContainer = binder.swipeContainer;
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -54,6 +77,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
                 Log.i(TAG, "Refreshing Off!");
             }
         });
+
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -69,6 +93,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
         //create a client
         client = new TwitterClient(this);
 
+        //set scrollListener to enable scrolling through the feed.
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
@@ -118,7 +143,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
         return true;
     }
 
-    public void showComposeFragment(){
+    public void showComposeFragment() {
         Log.i(TAG, "OptionsItemSelected");
         ComposeFragment composeFragment = new ComposeFragment();
         composeFragment.show(getSupportFragmentManager(), "datePicker");
@@ -176,5 +201,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeFragme
     public void onFinished(Tweet tweet) {
         tweets.add(0, tweet);
         adapter.notifyDataSetChanged();
+
     }
 }

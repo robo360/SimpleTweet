@@ -13,10 +13,11 @@
         android:layout_height="wrap_content"
         app:counterEnabled="true"
         app:counterMaxLength="10">
+
         <EditText
             android:id="@+id/etCompose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="399dp"
+            android:layout_height="135dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="false"
             android:layout_alignParentEnd="true"
@@ -34,7 +35,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +43,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
-        android:text="tweet" />
+        android:backgroundTint="#1DA1F2"
+        android:text="tweet"
+        android:textColor="#F4F0F0"
+        app:cornerRadius="20dp" />
 
 </RelativeLayout>

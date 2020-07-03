@@ -1,11 +1,18 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="colorControlActivated">#1DA1F2</item>
+        <!-- Applied to framework control highlights (i.e ripples or list selectors) -->
+        <item name="colorControlHighlight">#1DA1F2</item>
+        <!-- Default color of the status bar at the top of your device  -->
+        <item name="android:statusBarColor">#1DA1F2</item>
+        <!-- Default color of the navigation bar at the bottom of your device  -->
+        <item name="android:navigationBarColor">#1DA1F2</item>
     </style>
 
     <!-- Application theme. -->
