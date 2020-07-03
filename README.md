@@ -46,15 +46,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-
-
-https://i.ibb.co/f8r4kVN/walkthrough9.gif
-
-
 <img src='https://i.ibb.co/5rnYWGk/walkthrough6.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 <img src='https://i.ibb.co/pPCLLtS/walkthrough7.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 <img src='https://i.ibb.co/k1qN13V/walkthrough10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 <img src='https://i.ibb.co/wsKQZRb/walkthrough8.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 <img src='https://i.ibb.co/f8r4kVN/walkthrough9.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
