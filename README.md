@@ -48,8 +48,6 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://i.ibb.co/5rnYWGk/walkthrough6.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<img src='https://i.ibb.co/pPCLLtS/walkthrough7.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
 <img src='https://i.ibb.co/k1qN13V/walkthrough10.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <img src='https://i.ibb.co/wsKQZRb/walkthrough8.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
