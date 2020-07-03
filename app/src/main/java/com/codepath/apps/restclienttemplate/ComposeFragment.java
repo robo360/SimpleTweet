@@ -44,7 +44,6 @@ public class ComposeFragment extends DialogFragment{
     }
 
 
-    // TODO: Rename and change types and number of parameters
     public static ComposeFragment newInstance() {
         ComposeFragment composeFragment = new ComposeFragment();
         return composeFragment;

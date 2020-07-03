@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class TweetDetailActivity extends AppCompatActivity {
     Tweet tweet;
     public static final int MAX_TWEET_LENGTH = 280;
 
+    //Todo: This code is very repetitive how to deal with that.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,7 +50,16 @@ public class TweetDetailActivity extends AppCompatActivity {
 
             binder.etComposeHolder.setCounterMaxLength(MAX_TWEET_LENGTH);
 
-            //set a click listener and make an api call to publish tweet
+            //set a click listener to go home.
+            binder.ibReflesh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(TweetDetailActivity.this, TimelineActivity.class);
+                    startActivity(i);
+                }
+            });
+
+            //set a click listener and make an api call to publish a reply
             btnTweet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -87,6 +99,15 @@ public class TweetDetailActivity extends AppCompatActivity {
             binder.tvLike.setText(Integer.toString(tweet.favoriteCount));
             Glide.with(TweetDetailActivity.this).load(tweet.user.profileImageUrl).transform(new CircleCrop()).into(binder.ivProfileImage);
             binder.etCompose.setHint("@" + tweet.user.screenName);
+
+            binder.ibReflesh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(TweetDetailActivity.this, TimelineActivity.class);
+                    startActivity(i);
+                }
+            });
+
             client = TwitterApp.getRestClient(TweetDetailActivity.this);
             final TextView etCompose = binder.etCompose;
             final MaterialButton btnTweet = binder.btnTweet;

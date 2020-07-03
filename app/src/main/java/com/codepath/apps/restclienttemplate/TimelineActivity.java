@@ -30,6 +30,8 @@ import java.util.List;
 import okhttp3.Headers;
 
 public class TimelineActivity extends AppCompatActivity implements ComposeFragment.OnFinishListener {
+
+    // TODO: set every group of code apart depending on what they do. declrations, listeners, and other functionality.
     TwitterClient client;
     ActivityTimelineBinding binder;
     RecyclerView rvTweets;

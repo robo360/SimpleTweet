@@ -75,7 +75,9 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/ivProfileImage"
-                android:textSize="18dp"
+                android:fontFamily="sans-serif-black"
+                android:textColor="#333333"
+                android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
                 app:layout_constraintTop_toBottomOf="@+id/tvScreenName"
                 tools:text="This is my tweet"
@@ -123,7 +125,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="4"
                     android:gravity="center_horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageButton
@@ -143,7 +145,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="4"
                     android:gravity="center_horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageButton

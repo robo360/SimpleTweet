@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.TweetDetailActivity;
+import com.codepath.apps.restclienttemplate.TwitterClient;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.parceler.Parcels;
@@ -95,6 +96,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public class ViewHolderWithoutImage extends RecyclerView.ViewHolder {
+        TwitterClient client;
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
@@ -130,7 +132,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             };
           btnDetail.setOnClickListener(ListenerToDetailView);
           btnReply.setOnClickListener(ListenerToDetailView);
-
         }
 
         public void bindWithoutImage(Tweet tweet) {
@@ -145,7 +146,9 @@ public class TweetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    // TODO: This code is very repetitive. Find a better a way to write it.
     public class ViewHolderWithImage extends RecyclerView.ViewHolder {
+        TwitterClient client;
         ImageView ivProfileImage;
         ImageView ivMedia;
         TextView tvBody;

@@ -47,12 +47,12 @@
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/ivProfileImage"
             android:autoLink="web"
-            android:fontFamily="sans-serif-condensed-light"
+            android:fontFamily="sans-serif-black"
             android:linksClickable="true"
             android:textAlignment="textStart"
             android:textColor="#333333"
             android:textColorLink="#1976D2"
-            android:textSize="18sp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
@@ -112,6 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:clickable="false"
                     android:src="@drawable/ic_baseline_favorite_border_24" />
 
                 <TextView
@@ -132,6 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:clickable="false"
                     android:src="@drawable/ic_baseline_repeat_24" />
 
                 <TextView
@@ -161,8 +163,8 @@
 
         <View
             android:id="@+id/divider2"
-            android:layout_width="409dp"
-            android:layout_height="1dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="28dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"

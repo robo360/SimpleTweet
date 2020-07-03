@@ -45,9 +45,11 @@
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/ivProfileImage"
             android:autoLink="web"
+            android:fontFamily="sans-serif-black"
             android:linksClickable="true"
+            android:textColor="#2B2A2A"
             android:textColorLink="#0288D1"
-            android:textSize="18dp"
+            android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
             app:layout_constraintTop_toBottomOf="@+id/tvScreenName"
             tools:text="This is my tweet"
@@ -118,6 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:clickable="false"
                     android:src="@drawable/ic_baseline_favorite_border_24" />
 
                 <TextView
@@ -138,6 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:clickable="false"
                     android:src="@drawable/ic_baseline_repeat_24" />
 
                 <TextView
